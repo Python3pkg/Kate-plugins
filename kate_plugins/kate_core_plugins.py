@@ -53,7 +53,7 @@ def insertText(text, strip_line=False,
 
 
 def is_mymetype_python(doc, text_plain=False):
-    mimetype = unicode(doc.mimeType())
+    mimetype = str(doc.mimeType())
     if mimetype == 'text/x-python':
         return True
     elif mimetype == 'text/plain' and text_plain:
@@ -62,7 +62,7 @@ def is_mymetype_python(doc, text_plain=False):
 
 
 def is_mymetype_js(doc, text_plain=False):
-    mimetype = unicode(doc.mimeType())
+    mimetype = str(doc.mimeType())
     if mimetype == 'application/javascript':
         return True
     elif mimetype == 'text/plain' and text_plain:
@@ -72,7 +72,7 @@ def is_mymetype_js(doc, text_plain=False):
 
 def get_session():
     main_window = kate.mainWindow()
-    title = unicode(main_window.windowTitle())
+    title = str(main_window.windowTitle())
     session = None
     if title and title != 'Kate' and ":" in title:
         session = title.split(":")[0]
@@ -88,7 +88,7 @@ def get_last_session():
     kgroup = KConfigGroup(config, "General")
     session = kgroup.readEntry("Last Session")
     if session:
-        session = unicode(session)
+        session = str(session)
         session = session.replace('.katesession', '')
         return session
     return None

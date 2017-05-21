@@ -37,7 +37,7 @@ def generateErrorMessage(error, key_line='line', key_column='column', header=Tru
         else:
             message = '~*~ Line: %s' % line
         message += ' ~*~'
-    for key, value in error.items():
+    for key, value in list(error.items()):
         if value and key not in exclude_keys:
             if key != 'message':
                 message = '%s\n     * %s: %s' % (message, key, value)
@@ -105,7 +105,7 @@ def showErrors(message, errors, key_mark, doc, time=10, icon='dialog-warning',
         messages[pos].append(error_message)
         mark_iface.setMark(line - 1, mark_iface.Error)
 
-    messages_items = messages.items()
+    messages_items = list(messages.items())
     messages_items.sort()
     if move_cursor:
         first_error, messages_show = getErrorMessagesOrder(messages_items,

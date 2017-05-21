@@ -40,10 +40,10 @@ def checkJslint(currentDocument=None, refresh=True):
                  exclude_all=not currentDocument)
     move_cursor = not currentDocument
     currentDocument = currentDocument or kate.activeDocument()
-    path = unicode(currentDocument.url().path())
+    path = str(currentDocument.url().path())
     mark_key = '%s-jslint' % path
 
-    text = unicode(currentDocument.text())
+    text = str(currentDocument.text())
     errors = check_JSLint(text.encode('utf-8', 'ignore'))
     errors_to_show = []
 

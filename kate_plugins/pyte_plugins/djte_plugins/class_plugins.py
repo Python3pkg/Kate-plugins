@@ -61,7 +61,7 @@ def create_frame(pattern_str='', title='', name_field=''):
     view = kate.activeView()
     class_name, ok = QtGui.QInputDialog.getText(view, title, name_field)
     if ok:
-        class_name = unicode(class_name)
+        class_name = str(class_name)
         class_model = class_name.replace('Form', '')
         text = pattern_str % {'class_name': class_name,
                               'class_model': class_model}

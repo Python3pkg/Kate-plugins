@@ -16,7 +16,7 @@
 
 import kate
 
-from kate_core_plugins import move_menu_submenu, separated_menu
+from .kate_core_plugins import move_menu_submenu, separated_menu
 
 PY_MENU = "Python"
 DJ_MENU = "Django"

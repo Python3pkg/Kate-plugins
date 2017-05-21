@@ -33,13 +33,13 @@ def parseCode(doc=None, refresh=True):
         checkAll.f(doc, ['parseCode'], exclude_all=not doc)
     move_cursor = not doc
     doc = doc or kate.activeDocument()
-    text = unicode(doc.text())
+    text = str(doc.text())
     text = text.encode('utf-8', 'ignore')
-    mark_key = '%s-parse-python' % unicode(doc.url().path())
+    mark_key = '%s-parse-python' % str(doc.url().path())
     try:
         compiler.parse(text)
         showOk('Parse code Ok')
-    except SyntaxError, e:
+    except SyntaxError as e:
         error = {}
         error['filename'] = e.filename
         error['text'] = e.text

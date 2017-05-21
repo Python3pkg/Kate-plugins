@@ -129,14 +129,14 @@ class PythonCodeCompletionModel(AbstractCodeCompletionModel):
         try:
             return pyplete.get_importables_from_line(list_autocomplete, text,
                                                      code_line, text_info)
-        except SyntaxError, e:
+        except SyntaxError as e:
             self.treatmentException(e)
         return False
 
     def getImportablesFromText(self, list_autocomplete, text):
         try:
             return pyplete.get_importables_from_text(list_autocomplete, text)
-        except SyntaxError, e:
+        except SyntaxError as e:
             self.treatmentException(e)
         return False
 
@@ -165,7 +165,7 @@ class PythonCodeCompletionModel(AbstractCodeCompletionModel):
 
     def _parseText(self, view, word, line):
         doc = view.document()
-        text = unicode(doc.text())
+        text = str(doc.text())
         text = text.encode('utf-8', 'ignore')
         text_list = text.split("\n")
         raw, column = word.start().position()

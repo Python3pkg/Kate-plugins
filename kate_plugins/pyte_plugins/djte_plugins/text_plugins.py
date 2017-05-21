@@ -37,7 +37,7 @@ from django.template import RequestContext
 @kate.action(**KATE_ACTIONS['importUrls'])
 def importUrls():
     currentDocument = kate.activeDocument()
-    path = unicode(currentDocument.url().directory())
+    path = str(currentDocument.url().directory())
     path_split = path.split('/')
     application = path_split[len(path_split) - 1] or TEXT_TO_CHANGE
     insertText(TEXT_URLS % {'app': application,

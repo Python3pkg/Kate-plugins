@@ -66,7 +66,7 @@ def insertInit():
     currentPosition = view.cursorPosition()
     currentLine = currentPosition.line()
     while currentLine >= 0:
-        text = unicode(currentDocument.line(currentLine))
+        text = str(currentDocument.line(currentLine))
         match = pattern_class.match(text)
         if match:
             class_name = match.groups()[0]
@@ -86,7 +86,7 @@ def change_kwargs(param):
 
 def get_number_espaces(currentDocument, currentLine,
                        parentheses=0, initial_instruct=False):
-    line_before = unicode(currentDocument.line(currentLine - 1))
+    line_before = str(currentDocument.line(currentLine - 1))
     if not line_before.strip() and currentLine >= 0:
         return get_number_espaces(currentDocument, currentLine - 1,
                                   parentheses=parentheses,
@@ -123,7 +123,7 @@ def get_prototype_of_current_func():
     currentLine = currentPosition.line()
     func_def_espaces = None
     while currentLine >= 0:
-        text = unicode(currentDocument.line(currentLine))
+        text = str(currentDocument.line(currentLine))
         if find_finish_def:
             text_def = '%s\n%s' % (text, text_def)
         else:
@@ -167,7 +167,7 @@ def insertSuper():
     currentPosition = view.cursorPosition()
     currentLine = currentPosition.line()
     espaces, class_name, func_name, params = get_prototype_of_current_func()
-    text = unicode(currentDocument.line(currentLine)).strip()
+    text = str(currentDocument.line(currentLine)).strip()
     text_super_template = TEXT_SUPER
     if not text:
         currentDocument.removeLine(currentPosition.line())
@@ -186,7 +186,7 @@ def callRecursive():
     currentPosition = view.cursorPosition()
     currentLine = currentPosition.line()
     espaces, class_name, func_name, params = get_prototype_of_current_func()
-    text = unicode(currentDocument.line(currentLine)).strip()
+    text = str(currentDocument.line(currentLine)).strip()
     if class_name != TEXT_TO_CHANGE:
         text_recursive_template = TEXT_RECURSIVE_CLASS % (espaces, params[0], func_name, ', '.join(params[1:]))
     else:

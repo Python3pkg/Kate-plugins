@@ -74,11 +74,11 @@ class AbstractCodeCompletionModel(KTextEditor.CodeCompletionModel):
         self.invocationType = invocationType
         if line_start != line_end:
             return None
-        mimetype = unicode(view.document().mimeType())
+        mimetype = str(view.document().mimeType())
         if not mimetype in self.MIMETYPES:
             return None
         doc = view.document()
-        line = unicode(doc.line(line_start))
+        line = str(doc.line(line_start))
         if not line:
             return line
         return self.parseLine(line, column_end)
@@ -170,7 +170,7 @@ class AbstractJSONFileCodeCompletionModel(AbstractCodeCompletionModel):
         children = self.getChildrenInJSON(lastExpression, self.getJSON(lastExpression, line))
         if not children:
             return
-        for child, attrs in children.items():
+        for child, attrs in list(children.items()):
             index = self.createItemAutoComplete(text=child,
                                     category=attrs.get('category', None),
                                     args=attrs.get('args', None),

@@ -32,7 +32,7 @@ def pyflakes(codeString, filename):
     # First, compile into an AST and handle syntax errors.
     try:
         tree = compile(codeString, filename, "exec", _ast.PyCF_ONLY_AST)
-    except SyntaxError, value:
+    except SyntaxError as value:
         msg = value.args[0]
         lineno = value.lineno
         # If there's an encoding problem with the file, the text is None.
@@ -63,10 +63,10 @@ def checkPyflakes(currentDocument=None, refresh=True):
     move_cursor = not currentDocument
     currentDocument = currentDocument or kate.activeDocument()
 
-    path = unicode(currentDocument.url().path())
+    path = str(currentDocument.url().path())
     mark_key = '%s-pyflakes' % path
 
-    text = unicode(currentDocument.text())
+    text = str(currentDocument.text())
     errors = pyflakes(text.encode('utf-8', 'ignore'), path)
     errors_to_show = []
 
